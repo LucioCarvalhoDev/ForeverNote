@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<!--Fonte Logo-->
+	<link href="https://fonts.googleapis.com/css2?family=Recursive:wght@500&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+	<!--Simbolos-->
+	<script src="https://kit.fontawesome.com/75e212fce1.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+	<header>
+		<h1 class="logo clickable">Forever Note</h1>
+		<div class="options">
+			<i class="fas fa-plus-circle option-icon option-icon-add clickable"></i>
+			<i class="fas fa-trash-alt option-icon option-icon-trash clickable"></i>
+		</div>
+	</header>
+
+	<main>
+
+		<section class="notes">
+
+		</section>
+		
+		<section class="model" data-active="false">
+			<div class="overlay">
+				<div class="form-note">
+					<div class="title">
+						<label for="form-note__title">Titulo</label>
+						<input type="text" id="form-note__title">
+					</div>
+					<div class="content">
+						<label for="form-note__content">Conteudo</label>
+						<textarea type="text" id="form-note__content"></textarea>
+					</div>
+					<div class="form-note__button">
+						<button>Salvar</button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<script src="js/models/Note.js"></script>
+	<script src="js/models/NoteList.js"></script>
+	<script src="js/views/NoteView.js"></script>
+	<script src="js/controller/controller.js"></script>
+	<script src="index.js"></script>
+
+</body>
+
+</html>
