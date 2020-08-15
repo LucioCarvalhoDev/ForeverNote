@@ -11,7 +11,7 @@ const noteController = new NoteController();
     const addButton = $('.option-icon-add');
     const trashButton = $('.option-icon-trash');
 
-    const submitButton = $('.form-note__button button');
+    const submitButton = $('.submit button');
 
     const modalSection = $('[data-active]');
     const overlay = $('.overlay');
@@ -47,5 +47,6 @@ const noteController = new NoteController();
         clearModal();
         closeModal(); 
     })
+
 
 })()

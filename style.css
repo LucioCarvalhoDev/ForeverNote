@@ -42,8 +42,10 @@ main {
     background: rgb(235, 235, 110);
     border: 1px solid  rgba(83, 83, 83, 0.308);
     box-shadow: 0px 2px 5px #949494; 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+    grid-template-areas: 'title' 'content';
+    grid-gap: 1px;
     height: 100%;
     max-height: 50vh;
     
@@ -59,10 +61,10 @@ main {
 }
 
 .note-title {
+    grid-area: title;
     align-items: center;
     display: flex;
     font-weight: bold;
-    max-height: 25%;    
     justify-content: center;
     font-size: 1.125rem;
     border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -70,12 +72,15 @@ main {
 }
 
 .note-content {
-    padding-top: 10px;
+    grid-area: content;
+    height: 100%;
+    padding: 5px 0;
+    overflow: hidden;
 }
 
 .option-icon {
     margin-left: 15px;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     transition: all 500ms;
 }
 
@@ -115,10 +120,11 @@ main {
     height: 90%;
     border-radius: 10px;
     padding: 20px;
-}
-
-.form-note div {
-    padding: 10px;
+    display: grid;
+    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-areas: 'title' 'content' 'submit';
+    overflow: hidden;
+    
 }
 
 .form-note div label {
@@ -135,33 +141,39 @@ main {
     padding: 5px;
 }
 
+.form-note input:focus, .form-note textarea:focus {
+    outline: none;
+}
+
 .form-note .title {
     height: 15%;
+    grid-area: title;
 }
 
 .form-note .content {
-    height: 70%;
+    grid-area: content;
 }
 
-#form-note__content {
-    resize: none;
-    height: fit-content;
-}
-
-.form-note__button {
-    height: 10%;
+.form-note .submit {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    grid-area: submit;
 }
 
-.form-note__button button {
+#form-note__content {
+    resize: none;
+    height: 100%;
+}
+
+.submit button {
     width: 100%;
     height: 3rem;
     background: rgb(101, 182, 219);
     border: none;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     font-weight: bold;
     color: #fdfdfd;
 }

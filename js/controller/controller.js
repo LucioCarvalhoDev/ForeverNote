@@ -9,4 +9,17 @@ class NoteController {
         
         this.noteView.update(this.noteList._data);
     }
+
+    removeNote(note) {
+        
+        this.noteList.exclude(note);
+
+        this.noteView.update(this.noteList._data);
+    }
+
+    getNotes() {
+        return this.noteList._data;
+    }
+
 }
+
