@@ -3,13 +3,16 @@ class NoteController {
         this.noteList = new NoteList();
         this.noteView = new NoteView();
 
-        this.noteDao = new NoteDao();
     }
 
     addNote(note) {
         this.noteList.add(note);
 
-        this.noteDao.addNote(note);
+        ConnectionFactory
+            .getConnection()
+            .then(connection => new NoteDao(connection))
+            .then(dao => dao.addNote())
+            .then(response => response)
         
         this.noteView.update(this.noteList._data);
     }
@@ -22,8 +25,11 @@ class NoteController {
     }
 
     loadNotes() {
-        var list = this.noteDao.getNotes();
-        return list;
+
+        ConnectionFactory
+            .getConnection()
+            .then(connection => new NoteDao(connection))
+            .then(dao => console.log(dao))
     }
 
 }
