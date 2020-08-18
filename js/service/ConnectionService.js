@@ -23,7 +23,7 @@ class ConnectionFactory {
 
             request.onsuccess = event => {
 
-                let connection= event.target.result;
+                let connection = event.target.result;
                 resolve(connection) 
             }
         })

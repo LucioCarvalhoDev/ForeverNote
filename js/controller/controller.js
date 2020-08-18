@@ -2,25 +2,20 @@ class NoteController {
     constructor() {
         this.noteList = new NoteList();
         this.noteView = new NoteView();
-
+        this.loadNotes();
     }
 
     addNote(note) {
+
         this.noteList.add(note);
 
         ConnectionFactory
             .getConnection()
             .then(connection => new NoteDao(connection))
-            .then(dao => dao.addNote())
-            .then(response => response)
+            .then(dao => dao.addNote(note))
+            .then(message => console.log(message))
+            .catch(message => console.log(message));
         
-        this.noteView.update(this.noteList._data);
-    }
-
-    removeNote(note) {
-        
-        this.noteList.exclude(note);
-
         this.noteView.update(this.noteList._data);
     }
 
@@ -29,7 +24,17 @@ class NoteController {
         ConnectionFactory
             .getConnection()
             .then(connection => new NoteDao(connection))
-            .then(dao => console.log(dao))
+            .then(dao => dao.getNotes())
+            .then(list => {
+                list.forEach(note => {
+                    this.noteList.add(note);
+                    this.noteView.update(this.noteList._data);
+                })
+            })        
+    }
+
+    viewNoteList() {
+        return [].concat(this.noteList._data);
     }
 
 }
