@@ -4,6 +4,7 @@ class NoteList {
     }
 
     add(note) {
+         
         this._data.push(note)
     }
 
