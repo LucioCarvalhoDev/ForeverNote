@@ -16,6 +16,6 @@
 
  O que proponho com essas linhas de código é criar uma aplicação capaz de gravar digitalmente nossos textos, ForeverNote é o cúmulo da luta humana contra a limitada memória que esse corpo de carne nos oferece. Trata-se de um sistema inovador baseado em notas, cada nota possui um titulo e um conteudo da escolha do usuário. Os dados são salvos após o preenchimento de um breve formulário e podem ser visitados a qualquer momento pelo navegador sem a necessidade de uma conexão de internet.
 
-<h2>Resumo</2>
+<h2>Resumo</h2>
 
  Um SPA/mvc feito com vanilla.js para salvar notas. Isso, tipo o color note ou google keep.
