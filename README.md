@@ -1,4 +1,4 @@
-<h1>Forever Note</h1>
+<h1>Forever Note</h1><i>Dica: Pule para a sessão Resumo</i>
 
 <h2>Introdução</h2>
 
