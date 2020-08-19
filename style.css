@@ -4,6 +4,18 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(83, 83, 83, 0.308);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
 .clickable {
     cursor: pointer;
 }
@@ -21,6 +33,7 @@ header {
     color: #fdfdfd; 
     font-family: 'recursive';
     margin-bottom: 20px;
+    z-index: 3;
 }
 
 main {
@@ -48,6 +61,8 @@ main {
     grid-gap: 1px;
     height: 100%;
     max-height: 50vh;
+    min-height: 30vh;
+    color: #2e2c2c;
     
     padding-left: 10px;
     padding-right: 10px;
@@ -183,10 +198,16 @@ main {
     .notes {
         grid-template-columns: repeat(3, 30fr);
     }
+
+    
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
     .notes {
         grid-template-columns: repeat(2, 47fr);
+    }
+
+    .note {
+        min-height: 40vh;
     }
 }

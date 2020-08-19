@@ -48,5 +48,29 @@ const noteController = new NoteController();
         closeModal(); 
     })
 
+    let observer = new MutationObserver(function(){
+        
+        let untrackedNotes = document.querySelectorAll("[data-event='false']");
+        let allNotes = Array.from(document.querySelectorAll(".note"));
+
+        untrackedNotes.forEach(item => {
+
+            item.addEventListener('click', event => {
+
+                const target = event.target;
+
+                if (target.classList.contains("note-title") || target.classList.contains("note-content")) {
+
+                    return noteController.deleteNote(allNotes.indexOf(event.target.parentElement));
+                }
+                
+                return noteController.deleteNote(allNotes.indexOf(event.target));
+            })
+
+            item.dataset.event = true;
+        })
+    });
+
+    observer.observe(document.querySelector('.notes'), { attributes: false, childList: true, subtree: false })
 
 })()

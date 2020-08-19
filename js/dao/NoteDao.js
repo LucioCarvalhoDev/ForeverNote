@@ -51,4 +51,27 @@ class NoteDao {
                 }
         }) 
     }
+
+    deleteNote(key) {
+
+        //console.log("NoteDao.deleteNote chamado")
+
+        return new Promise((resolve, reject) => {
+
+            let request = this.connection
+                .transaction(['notes'], 'readwrite')
+                .objectStore('notes')
+                .delete(key);
+
+            request.onsuccess = event => {
+                resolve("Sucesso ao remover nota em NoteDao")
+            }
+
+            request.onerror = event => {
+                reject("Falha ao remover nota em NoteDao");
+            }
+                
+        })
+
+    }
 }

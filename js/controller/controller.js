@@ -20,17 +20,38 @@ class NoteController {
     }
 
     loadNotes() {
+        //console.warn("noteController.loadNotes chamado")
 
         ConnectionFactory
             .getConnection()
             .then(connection => new NoteDao(connection))
             .then(dao => dao.getNotes())
             .then(list => {
+                this.noteList._data = [];
                 list.forEach(note => {
                     this.noteList.add(note);
-                    this.noteView.update(this.noteList._data);
                 })
-            })        
+                this.noteView.update(this.noteList._data);
+            })
+    }
+
+    deleteNote(index) {
+        //console.log("noteController.deleteNote chamado")
+        let key = this.noteList._data[index]["_title"];
+        
+        ConnectionFactory
+            .getConnection()
+            .then(connection => new NoteDao(connection))
+            .then(dao => dao.deleteNote(key))
+            .then(message => {
+                
+                console.log(message)
+            })
+            .catch(message => {
+                console.error(message)
+            })
+        
+        this.loadNotes();
     }
 
     viewNoteList() {

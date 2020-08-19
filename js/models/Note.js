@@ -15,4 +15,8 @@ class Note {
     get content() {
         return this._content;
     }
+
+    isEquals(note2) {
+        return JSON.stringify(this) == JSON.stringify(note2);
+    }
 }
