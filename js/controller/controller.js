@@ -1,7 +1,6 @@
 class NoteController {
     constructor() {
-        this.noteList = new NoteList();
-        this.noteView = new NoteView();
+        this.noteList = Bind.create(new NoteList(), new NoteView());
         this.loadNotes();
     }
 
@@ -14,29 +13,23 @@ class NoteController {
             .then(connection => new NoteDao(connection))
             .then(dao => dao.addNote(note))
             .then(message => console.log(message))
-            .catch(message => console.log(message));
-        
-        this.noteView.update(this.noteList._data);
+            .catch(message => console.log(message));        
     }
 
     loadNotes() {
-        //console.warn("noteController.loadNotes chamado")
-
         ConnectionFactory
             .getConnection()
             .then(connection => new NoteDao(connection))
             .then(dao => dao.getNotes())
             .then(list => {
-                this.noteList._data = [];
+                this.noteList._reset();
                 list.forEach(note => {
                     this.noteList.add(note);
-                })
-                this.noteView.update(this.noteList._data);
+                })                
             })
     }
 
     deleteNote(index) {
-        //console.log("noteController.deleteNote chamado")
         let key = this.noteList._data[index]["_title"];
         
         ConnectionFactory
