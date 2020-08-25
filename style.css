@@ -33,7 +33,7 @@ header {
     color: #fdfdfd; 
     font-family: 'recursive';
     margin-bottom: 20px;
-    z-index: 3;
+    z-index: 1;
 }
 
 main {
