@@ -90,7 +90,6 @@ class NoteDao {
         let cursor = event.target.result;
 
         if (cursor) {
-          console.log(cursor.key, key)
 
           if (cursor.key == key) {
 
@@ -106,9 +105,6 @@ class NoteDao {
 
         }
       }
-
-      
-
     })
   }
 }

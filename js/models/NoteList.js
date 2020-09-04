@@ -15,6 +15,10 @@ class NoteList {
         this._data = [];
     }
 
+    get(id) {
+        return this._data[id];
+    }
+
     find(title) {
         return this._data.findIndex(note => {
             return note['_title'] == title;
