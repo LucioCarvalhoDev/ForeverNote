@@ -1,7 +1,8 @@
 class Note {
-    constructor(title, content) {
+    constructor(title, content, time) {
         this._title = title || "generic title";
         this._content = content || "generic content";
+        this._date = time || Date.now();
     }
 
     get title() {

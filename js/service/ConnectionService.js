@@ -17,7 +17,8 @@ class ConnectionFactory {
             request.onupgradeneeded = event => {
                 
                 if (!request.result.objectStoreNames.contains(stores)) {
-                    request.result.createObjectStore('notes', {keyPath: "_title"})
+                    request.result.createObjectStore('notes',
+                    {keyPath: "_date"})
                 }
             }
 

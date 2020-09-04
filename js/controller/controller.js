@@ -30,8 +30,8 @@ class NoteController {
     }
 
     deleteNote(index) {
-        let key = this.noteList._data[index]["_title"];
-        
+        let key = this.noteList._data[index]["_date"];
+        console.log(key)
         ConnectionFactory
             .getConnection()
             .then(connection => new NoteDao(connection))
@@ -49,6 +49,21 @@ class NoteController {
 
     viewNoteList() {
         return [].concat(this.noteList._data);
+    }
+
+    editNote(id) {
+
+      let key = this.noteList._data[id]['_date'];
+
+      ConnectionFactory
+        .getConnection()
+        .then(connection => new NoteDao(connection))
+        .then(dao => dao.editNote(0,0,key))
+        .then(res => {
+          console.log(res);
+        })
+
+        this.loadNotes();
     }
 
 }

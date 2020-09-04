@@ -1,77 +1,114 @@
 class NoteDao {
-    constructor(connection) {
-        this.connection = connection;
-    }
+  constructor(connection) {
+    this.connection = connection;
+  }
 
-    addNote(note) {
+  addNote(note) {
 
-        return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
-            let transaction = this.connection.transaction(['notes'], 'readwrite');
-        
-            transaction.objectStore('notes').add(note);
+      let transaction = this.connection.transaction(['notes'], 'readwrite');
 
-            transaction.oncomplete = event => {
+      transaction.objectStore('notes').add(note);
 
-                resolve('nota adicionada ao banco de dados');
-            }
+      transaction.oncomplete = event => {
 
-            transaction.onerror = event => {
+        resolve('nota adicionada ao banco de dados');
+      }
 
-                reject('erro ao adicionar nota no banco de dados');
-            }
-        })     
-    }
+      transaction.onerror = event => {
 
-    getNotes() {
+        reject('erro ao adicionar nota no banco de dados');
+      }
+    })
+  }
 
-        return new Promise((resolve, reject) => {
+  getNotes() {
 
-            let allNotes = [];
+    return new Promise((resolve, reject) => {
 
-            this.connection
-                .transaction(['notes'], 'readonly')
-                .objectStore('notes')
-                .openCursor()
-                .onsuccess = event => {
+      let allNotes = [];
 
-                    let cursor = event.target.result;
+      this.connection
+        .transaction(['notes'], 'readonly')
+        .objectStore('notes')
+        .openCursor()
+        .onsuccess = event => {
 
-                    if (cursor) {
+          let cursor = event.target.result;
 
-                        let actual = cursor.value;
+          if (cursor) {
 
-                        allNotes.push(new Note(actual['_title'], actual['_content']));
+            let actual = cursor.value;
 
-                        cursor.continue();
-                    } else {
+            allNotes.push(
+              new Note(actual['_title'], actual['_content'], actual['_date'])
+            );
 
-                        resolve(allNotes)
-                    }
-                }
-        }) 
-    }
+            cursor.continue();
+          } else {
 
-    deleteNote(key) {
+            resolve(allNotes)
+          }
+        }
+    })
+  }
 
-        //console.log("NoteDao.deleteNote chamado")
+  deleteNote(key) {
 
-        return new Promise((resolve, reject) => {
+    //console.log("NoteDao.deleteNote chamado")
 
-            let request = this.connection
-                .transaction(['notes'], 'readwrite')
-                .objectStore('notes')
-                .delete(key);
+    return new Promise((resolve, reject) => {
 
-            request.onsuccess = event => {
-                resolve("Sucesso ao remover nota em NoteDao")
-            }
+      let request = this.connection
+        .transaction(['notes'], 'readwrite')
+        .objectStore('notes')
+        .delete(key);
 
-            request.onerror = event => {
-                reject("Falha ao remover nota em NoteDao");
-            }
-                
-        })
+      request.onsuccess = event => {
+        resolve("Sucesso ao remover nota em NoteDao")
+      }
 
-    }
+      request.onerror = event => {
+        reject("Falha ao remover nota em NoteDao");
+      }
+
+    })
+  }
+
+  editNote(newTitle, newContent, key) {
+
+    return new Promise((resolve, reject) => {
+
+      let request = this.connection
+        .transaction(['notes'], 'readwrite')
+        .objectStore('notes')
+        .openCursor();
+
+      request.onsuccess = e => {
+
+        let cursor = event.target.result;
+
+        if (cursor) {
+          console.log(cursor.key, key)
+
+          if (cursor.key == key) {
+
+            let actual = cursor.value;
+  
+            actual['_title'] = newTitle;
+            actual['_content'] = newContent;
+  
+            cursor.update(actual);
+          }
+
+          cursor.continue();
+
+        }
+      }
+
+      
+
+    })
+  }
 }

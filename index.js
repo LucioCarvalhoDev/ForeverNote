@@ -1,76 +1,86 @@
 
 const noteController = new NoteController();
 
-(function() {
+(function () {
 
-    const $ = document.querySelector.bind(document);
+  const $ = document.querySelector.bind(document);
 
-    const inputTitle = $('#form-note__title');
-    const inputContent = $('#form-note__content');
+  const inputTitle = $('#form-note__title');
+  const inputContent = $('#form-note__content');
 
-    const addButton = $('.option-icon-add');
-    const trashButton = $('.option-icon-trash');
+  const addButton = $('.option-icon-add');
+  const trashButton = $('.option-icon-trash');
 
-    const submitButton = $('.submit button');
+  const submitButton = $('.submit button');
 
-    const modalSection = $('[data-active]');
-    const overlay = $('.overlay');
+  const modalSection = $('[data-active]');
+  const overlay = $('.overlay');
 
-    function closeModal() {modalSection.style.display="none"}
-    function openModal() {modalSection.style.display="block"}
-    function clearModal() {
-        inputTitle.value = "";
-        inputContent.value = "";
+  function closeModal() { modalSection.style.display = "none" }
+  function openModal() { modalSection.style.display = "block" }
+  function clearModal() {
+    inputTitle.value = "";
+    inputContent.value = "";
+  }
+
+  addButton.addEventListener('click', event => {
+
+    openModal();
+  })
+
+  overlay.addEventListener('click', event => {
+
+    if (event.target == overlay) {
+
+      clearModal();
+      closeModal();
     }
+  })
 
-    addButton.addEventListener('click', event => {
-            
-        openModal();  
-    })
+  submitButton.addEventListener('click', event => {
 
-    overlay.addEventListener('click', event => {
+    noteController.addNote(new Note(inputTitle.value, inputContent.value))
 
-        if (event.target == overlay) {
+    inputTitle.value = "";
+    inputTitle.content = "";
 
-            clearModal();
-            closeModal();
-        }
-    })
+    clearModal();
+    closeModal();
+  })
 
-    submitButton.addEventListener('click', event => {
+  let observer = new MutationObserver(function () {
 
-        noteController.addNote(new Note(inputTitle.value, inputContent.value))
+    let untrackedNotes = document.querySelectorAll("[data-event='false']");
+    let allNotes = Array.from(document.querySelectorAll(".note"));
 
-        inputTitle.value = "";
-        inputTitle.content = "";
+    untrackedNotes.forEach(item => {
 
-        clearModal();
-        closeModal(); 
-    })
+      item.addEventListener('click', event => {
 
-    let observer = new MutationObserver(function(){
+        const target = event.target.classList.contains('note') ?
+          event.target :
+          event.target.parentElement;        
+
+        noteController.editNote(allNotes.indexOf(target));
+      })
+
+      item.addEventListener('contextmenu', event => {
+        event.preventDefault();
+
+        const target = event.target.classList.contains('note') ?
+          event.target :
+          event.target.parentElement;        
         
-        let untrackedNotes = document.querySelectorAll("[data-event='false']");
-        let allNotes = Array.from(document.querySelectorAll(".note"));
 
-        untrackedNotes.forEach(item => {
+        noteController.deleteNote(allNotes.indexOf(target));
+        return false;
+      })
 
-            item.addEventListener('click', event => {
+      item.dataset.event = true;
+    })
 
-                const target = event.target;
+  });
 
-                if (target.classList.contains("note-title") || target.classList.contains("note-content")) {
-
-                    return noteController.deleteNote(allNotes.indexOf(event.target.parentElement));
-                }
-                
-                return noteController.deleteNote(allNotes.indexOf(event.target));
-            })
-
-            item.dataset.event = true;
-        })
-    });
-
-    observer.observe(document.querySelector('.notes'), { attributes: false, childList: true, subtree: false })
+  observer.observe(document.querySelector('.notes'), { attributes: false, childList: true, subtree: false })
 
 })()
