@@ -11,10 +11,6 @@ class NoteController {
       });
   }
 
-  init() {
-    this.loadNotes();
-  }
-
   addNote(title, content) {
 
     const note = new Note(title, content);
