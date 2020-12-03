@@ -1,6 +1,17 @@
 class NoteController {
   constructor() {
     this.noteList = Bind.create(new NoteList(), new NoteView());
+    this.loadNotes()
+      .then(res => {
+        if (res.length === 0) {
+          this.addNote(
+            "Bem vindo!",
+            "Você pode adicionar uma anotação clicando no botão \"+\", apagar clicando nela com o lado direito do mouse e para editar é apenas clicar com o esquerdo. Espero que goste :)");
+        }
+      });
+  }
+
+  init() {
     this.loadNotes();
   }
 
@@ -20,16 +31,19 @@ class NoteController {
   }
 
   loadNotes() {
-    ConnectionFactory
-      .getConnection()
-      .then(connection => new NoteDao(connection))
-      .then(dao => dao.getNotes())
-      .then(list => {
-        this.noteList._reset();
-        list.forEach(note => {
-          this.noteList.add(note);
+    return new Promise((resolve, reject) => {
+      ConnectionFactory
+        .getConnection()
+        .then(connection => new NoteDao(connection))
+        .then(dao => dao.getNotes())
+        .then(list => {
+          this.noteList._reset();
+          list.forEach(note => {
+            this.noteList.add(note);
+          })
+          resolve(list);
         })
-      })
+    })
   }
 
   deleteNote(index) {
