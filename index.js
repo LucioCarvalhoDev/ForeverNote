@@ -4,6 +4,7 @@ const noteController = new NoteController();
 (function () {
 
   const $ = document.querySelector.bind(document);
+  const $id = document.getElementById.bind(document);
 
   const sectionModal = $('.modal');
 
@@ -30,8 +31,8 @@ const noteController = new NoteController();
       </div>`)
 
       
-      const inputTitle = $('#form-note__title');
-      const inputContent = $('#form-note__content');
+      const inputTitle = $id('form-note__title');
+      const inputContent = $id('form-note__content');
       
       inputTitle.value = title || '';
       inputContent.value = content || '';
