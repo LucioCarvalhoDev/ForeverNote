@@ -4,7 +4,7 @@
 ![ForeverNote Print](https://github.com/LucioCarvalhoDev/ForeverNote/blob/master/banner-readme.png)
 
 ## Preparando o ambiente
- Apenas fazer o download do zip e abrir o ```index.html```.
+ Apenas fazer o download do zip e abrir o ```index.html``` ou abrir o link https://luciocarvalhodev.github.io/ForeverNote/.
 
 ## Como usar
  - **Adicionar**: Botão "+" na extrema direita do cabeçalho.
