@@ -10,6 +10,7 @@ const noteController = new NoteController();
 
   const addButton = $('.option-icon-add');  
 
+  // Ativa a exibição do modal formulario para adição e edição de notas
   function modal(title, content, action) {
 
     sectionModal.innerHTML = (
@@ -57,6 +58,8 @@ const noteController = new NoteController();
     });
   })
 
+  // Garante que todas as notas receberão o evento de click
+  // Sem que aconteçam registros de evento repetidos
   let observer = new MutationObserver(function () {
 
     let untrackedNotes = document.querySelectorAll("[data-event='false']");
@@ -66,9 +69,13 @@ const noteController = new NoteController();
 
       item.addEventListener('click', event => {
 
+        // Caso o evento de click tenha tido como target um filho de 'note'
+        // Sobe na hierarquia até encontrar o elemento correto
         const target = event.target.classList.contains('note') ?
           event.target :
-          event.target.parentElement;
+          event.target.parentElement.classList.contains('note') ?
+            event.target.parentElement :
+            event.target.parentElement.parentElement;
 
         const idx = allNotes.indexOf(target);
         const note = noteController.noteList.get(idx);

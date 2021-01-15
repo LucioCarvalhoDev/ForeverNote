@@ -45,10 +45,11 @@ main {
     color: #434343;
     display: grid;
     grid-template-columns: repeat(4, 22fr);
+    grid-auto-rows: minmax(4rem ,40vh);
     grid-gap: 8px;
     min-height: 100vh;
     padding: 1%;
-    padding-top: calc(8vh + 1%);
+    margin-top: calc(8vh);
 }
 
 .note {
@@ -60,10 +61,8 @@ main {
     grid-template-areas: 'title' 'content';
     grid-gap: 1px;
     height: 100%;
-    max-height: 50vh;
-    min-height: 30vh;
     color: #2e2c2c;
-    
+    height: 100%;
     padding-left: 10px;
     padding-right: 10px;
     width: 100%;
@@ -82,6 +81,7 @@ main {
     font-weight: bold;
     justify-content: center;
     font-size: 1.125rem;
+    height: 1.5rem;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     box-shadow: 0px 2px 2px -2px gray;
     overflow: hidden;
@@ -197,6 +197,11 @@ main {
 @media screen and (max-width: 780px) {
     .notes {
         grid-template-columns: repeat(3, 30fr);
+        grid-auto-rows: minmax(4rem, 40vh);
+    }
+
+    .note {
+        height: 100%;
     }
 
     
@@ -204,10 +209,29 @@ main {
 
 @media screen and (max-width: 500px) {
     .notes {
-        grid-template-columns: repeat(2, 47fr);
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .note {
-        min-height: 40vh;
+        min-width: 48%;
+        width: max-content;
+        flex-grow: 1;
+        min-height: 3rem;
+        max-height: 40vh;
+    }
+
+    .note:hover {
+        transform: none;
+    }
+
+    .form-note {
+        width: 95vw;
+        height: 65vh;
     }
 }
+
+p {
+    word-wrap: break-word;
+}
+

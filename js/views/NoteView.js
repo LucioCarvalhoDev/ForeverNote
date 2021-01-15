@@ -11,7 +11,7 @@ class NoteView {
                 return acc += (
                     `<div class="note" data-event="false">
                         <div class="note-title">${cur.title}</div>
-                        <div class="note-content">${cur.content}</div>
+                        <div class="note-content"><p>${cur.content}</p></div>
                     </div>`
                 )
             }, "")}`

@@ -1,0 +1,9 @@
+{
+    "name": "Forever Note",
+    "short_name": "Forever Note",
+    "theme_color": "#e0ff49",
+    "background_color": "#393939",
+    "display": "fullscreen",
+    "scope": "/",
+    "start_url": "/index.html"
+}
