@@ -89,10 +89,11 @@ const noteController = new NoteController();
 
       item.addEventListener('contextmenu', event => {
         event.preventDefault();
-
         const target = event.target.classList.contains('note') ?
           event.target :
-          event.target.parentElement;
+          event.target.parentElement.classList.contains('note') ?
+            event.target.parentElement :
+            event.target.parentElement.parentElement;
 
 
         noteController.deleteNote(allNotes.indexOf(target));

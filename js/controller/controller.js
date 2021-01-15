@@ -3,7 +3,8 @@ class NoteController {
     this.noteList = Bind.create(new NoteList(), new NoteView());
     this.loadNotes()
       .then(res => {
-        if (res.length === 0) {
+        if (res.length === 0 && sessionStorage.getItem("isTutorialCompleted") === null) {
+          sessionStorage.setItem("isTutorialCompleted", true);
           this.addNote(
             "Bem vindo!",
             "Você pode adicionar uma anotação clicando no botão \"+\", apagar clicando nela com o lado direito do mouse e para editar é apenas clicar com o esquerdo. Espero que goste :)");

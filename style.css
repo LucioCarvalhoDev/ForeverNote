@@ -21,18 +21,18 @@
 }
 
 header {
-    padding: 1%;
-    display: flex;
-    position: fixed;
-    top: 0px;
-    height: 8vh;
-    width: 100%; 
-    background: #434343;
-    justify-content: space-between;
     align-items: center;
+    background: #434343;
     color: #fdfdfd; 
+    display: flex;
     font-family: 'recursive';
+    height: 8vh;
+    justify-content: space-between;
     margin-bottom: 20px;
+    top: 0px;
+    width: 100%; 
+    position: fixed;
+    padding: 1%;
     z-index: 1;
 }
 
@@ -56,12 +56,12 @@ main {
     background: rgb(235, 235, 110);
     border: 1px solid  rgba(83, 83, 83, 0.308);
     box-shadow: 0px 2px 5px #949494; 
+    color: #2e2c2c;
     display: grid;
     grid-template-rows: 1fr 9fr;
     grid-template-areas: 'title' 'content';
     grid-gap: 1px;
     height: 100%;
-    color: #2e2c2c;
     height: 100%;
     padding-left: 10px;
     padding-right: 10px;
@@ -75,15 +75,15 @@ main {
 }
 
 .note-title {
-    grid-area: title;
     align-items: center;
-    display: flex;
-    font-weight: bold;
-    justify-content: center;
-    font-size: 1.125rem;
-    height: 1.5rem;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     box-shadow: 0px 2px 2px -2px gray;
+    display: flex;
+    font-size: 1.125rem;
+    font-weight: bold;
+    grid-area: title;
+    height: 1.5rem;
+    justify-content: center;
     overflow: hidden;
 }
 
@@ -95,8 +95,8 @@ main {
 }
 
 .option-icon {
-    margin-left: 15px;
     font-size: 1.7rem;
+    margin-left: 15px;
     transition: all 500ms;
 }
 
@@ -113,33 +113,33 @@ main {
 }
 
 .modal {
+    display: block;
     width: 0;
     height: 0;
     position: fixed;
     top: 0px;
     z-index: 1;
-    display: block;
 }
 
 .overlay {
-    width: 100vw;
-    height: 100vh;
+    align-items: center;
     background: rgba(0,0,0,0.7);
     display: flex;
+    height: 100vh;
     justify-content: center;
-    align-items: center;
+    width: 100vw;
 }
 
 .form-note {
     background: #fdfdfd;
-    width: 70%;
-    height: 90%;
     border-radius: 10px;
-    padding: 20px;
     display: grid;
-    grid-template-rows: 1fr 8fr 1fr;
     grid-template-areas: 'title' 'content' 'submit';
+    grid-template-rows: 1fr 8fr 1fr;
+    height: 90%;
     overflow: hidden;
+    padding: 20px;
+    width: 70%;
     
 }
 
@@ -150,11 +150,11 @@ main {
 }
 
 #form-note__title, #form-note__content {
-    width: 100%;
     border: 1px solid rgba(0,0,0,0.2);
     border-radius: 5px;
     height: 2.5rem;
     padding: 5px;
+    width: 100%;
 }
 
 .form-note input:focus, .form-note textarea:focus {
@@ -162,8 +162,8 @@ main {
 }
 
 .form-note .title {
-    height: 15%;
     grid-area: title;
+    height: 15%;
 }
 
 .form-note .content {
@@ -171,27 +171,27 @@ main {
 }
 
 .form-note .submit {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    position: relative;
+    display: flex;
     grid-area: submit;
+    justify-content: center;
+    position: relative;
 }
 
 #form-note__content {
-    resize: none;
     height: 100%;
+    resize: none;
 }
 
 .submit button {
-    width: 100%;
-    height: 3rem;
     background: rgb(101, 182, 219);
     border: none;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    font-weight: bold;
     color: #fdfdfd;
+    font-weight: bold;
+    height: 3rem;
+    width: 100%;
 }
 
 @media screen and (max-width: 1000px) {
