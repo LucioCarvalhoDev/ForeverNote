@@ -10,6 +10,3 @@
  - **Adicionar**: Botão "+" na extrema direita do cabeçalho.
  - **Apagar**: Clique direito sobre uma nota.
  - **Editar**: Clique esquerdo sobre uma nota.
-
-### Atenção
- Portabilidade ainda não desenvolvida, por favor utilize apenas em um computador.
