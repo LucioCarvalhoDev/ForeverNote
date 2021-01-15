@@ -15,7 +15,6 @@ class NoteController {
   addNote(title, content) {
 
     const note = new Note(title, content);
-    console.log(note)
 
     this.noteList.add(note);
 
@@ -23,8 +22,8 @@ class NoteController {
       .getConnection()
       .then(connection => new NoteDao(connection))
       .then(dao => dao.addNote(note))
-      .then(message => console.log(message))
-      .catch(message => console.log(message));
+      // .then(message => console.log(message))
+      // .catch(message => console.log(message));
   }
 
   loadNotes() {
@@ -45,17 +44,16 @@ class NoteController {
 
   deleteNote(index) {
     let key = this.noteList._data[index]["_date"];
-    //console.log(key)
     ConnectionFactory
       .getConnection()
       .then(connection => new NoteDao(connection))
       .then(dao => dao.deleteNote(key))
       .then(message => {
 
-        console.log(message)
+        //console.log(message)
       })
       .catch(message => {
-        console.error(message)
+        //console.error(message)
       })
 
     this.loadNotes();
@@ -74,7 +72,7 @@ class NoteController {
       .then(connection => new NoteDao(connection))
       .then(dao => dao.editNote(newTitle, newContent, key))
       .then(res => {
-        console.log(res);
+        //console.log(res);
       })
 
     this.loadNotes();
