@@ -194,17 +194,22 @@ main {
     color: #fdfdfd;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 1000px) {
     .notes {
         grid-template-columns: repeat(3, 30fr);
+        grid-auto-rows: minmax(4rem, 40vh);
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .notes {
+        grid-template-columns: repeat(2, 49fr);
         grid-auto-rows: minmax(4rem, 40vh);
     }
 
     .note {
         height: 100%;
     }
-
-    
 }
 
 @media screen and (max-width: 500px) {
