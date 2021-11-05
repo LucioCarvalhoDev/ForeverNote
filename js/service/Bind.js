@@ -7,7 +7,6 @@ class Bind {
 
         let proxy = new Proxy(model, {
             get: function (target, prop, receiver) {
-                //console.log('get')
 
                 if (['add', 'reset', 'exclude'].includes(prop)) {
 
@@ -25,7 +24,6 @@ class Bind {
             },
 
             set: function (target, prop, value, receiver) {
-                //console.log('set')
 
                 let r = Reflect.set(target, prop, value, receiver);
                 view.update(target['_data']);

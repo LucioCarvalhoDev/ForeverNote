@@ -56,8 +56,6 @@ class NoteDao {
 
   deleteNote(key) {
 
-    //console.log("NoteDao.deleteNote chamado")
-
     return new Promise((resolve, reject) => {
 
       let request = this.connection

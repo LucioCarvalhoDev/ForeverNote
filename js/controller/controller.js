@@ -22,8 +22,6 @@ class NoteController {
       .getConnection()
       .then(connection => new NoteDao(connection))
       .then(dao => dao.addNote(note))
-      // .then(message => console.log(message))
-      // .catch(message => console.log(message));
   }
 
   loadNotes() {
@@ -49,11 +47,9 @@ class NoteController {
       .then(connection => new NoteDao(connection))
       .then(dao => dao.deleteNote(key))
       .then(message => {
-
-        //console.log(message)
       })
       .catch(message => {
-        //console.error(message)
+
       })
 
     this.loadNotes();

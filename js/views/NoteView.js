@@ -4,7 +4,6 @@ class NoteView {
     }
 
     update(data) {
-        //console.log("update chamado")
         if (!data) this.root.innerHTML = "";
         this.root.innerHTML = (
             `${data.reduce((acc, cur) => {
