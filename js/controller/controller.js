@@ -15,13 +15,13 @@ class NoteController {
   addNote(title, content) {
 
     const note = new Note(title, content);
-
+    console.log(note);
     this.noteList.add(note);
 
     ConnectionFactory
       .getConnection()
       .then(connection => new NoteDao(connection))
-      .then(dao => dao.addNote(note))
+      .then(dao => dao.addNote(note));
   }
 
   loadNotes() {
@@ -34,10 +34,10 @@ class NoteController {
           this.noteList._reset();
           list.forEach(note => {
             this.noteList.add(note);
-          })
+          });
           resolve(list);
-        })
-    })
+        });
+    });
   }
 
   deleteNote(index) {
@@ -50,7 +50,7 @@ class NoteController {
       })
       .catch(message => {
 
-      })
+      });
 
     this.loadNotes();
   }
@@ -68,8 +68,8 @@ class NoteController {
       .then(connection => new NoteDao(connection))
       .then(dao => dao.editNote(newTitle, newContent, key))
       .then(res => {
-        //console.log(res);
-      })
+        // console.log(res);
+      });
 
     this.loadNotes();
   }

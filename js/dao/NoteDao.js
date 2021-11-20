@@ -14,13 +14,13 @@ class NoteDao {
       transaction.oncomplete = event => {
 
         resolve('nota adicionada ao banco de dados');
-      }
+      };
 
       transaction.onerror = event => {
 
         reject('erro ao adicionar nota no banco de dados');
-      }
-    })
+      };
+    });
   }
 
   getNotes() {
@@ -48,10 +48,10 @@ class NoteDao {
             cursor.continue();
           } else {
 
-            resolve(allNotes)
+            resolve(allNotes);
           }
-        }
-    })
+        };
+    });
   }
 
   deleteNote(key) {
@@ -64,14 +64,14 @@ class NoteDao {
         .delete(key);
 
       request.onsuccess = event => {
-        resolve("Sucesso ao remover nota em NoteDao")
-      }
+        resolve("Sucesso ao remover nota em NoteDao");
+      };
 
       request.onerror = event => {
         reject("Falha ao remover nota em NoteDao");
-      }
+      };
 
-    })
+    });
   }
 
   editNote(newTitle, newContent, key) {
@@ -85,24 +85,24 @@ class NoteDao {
 
       request.onsuccess = e => {
 
-        let cursor = event.target.result;
+        let cursor = e.target.result;
 
         if (cursor) {
 
           if (cursor.key == key) {
 
             let actual = cursor.value;
-  
+
             actual['_title'] = newTitle;
             actual['_content'] = newContent;
-  
+
             cursor.update(actual);
           }
 
           cursor.continue();
 
         }
-      }
-    })
+      };
+    });
   }
 }
