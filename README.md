@@ -10,3 +10,4 @@
  - **Adicionar**: Botão "+" na extrema direita do cabeçalho.
  - **Apagar**: Clique direito sobre uma nota.
  - **Editar**: Clique esquerdo sobre uma nota.
+ - **Exportar**: Botão de download a direita no cabeçalho
