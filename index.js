@@ -8,7 +8,7 @@ const noteController = new NoteController();
 
   const sectionModal = $('.modal');
 
-  const addButton = $('.option-icon-add');  
+  const addButton = $('.option-icon-add');
 
   // Ativa a exibição do modal formulario para adição e edição de notas
   function modal(title, content, action) {
@@ -29,34 +29,37 @@ const noteController = new NoteController();
           <button data-button>Salvar</button>
         </div>
       </div>
-      </div>`)
+      </div>`);
 
-      
-      const inputTitle = $id('form-note__title');
-      const inputContent = $id('form-note__content');
-      
-      inputTitle.value = title || '';
-      inputContent.value = content || '';
 
-      $('.submit button').onclick = e => {
+    const inputTitle = $id('form-note__title');
+    const inputContent = $id('form-note__content');
 
-        action(inputTitle.value, inputContent.value);
+    inputTitle.value = title || '';
+    inputContent.value = content || '';
 
-        sectionModal.innerHTML = '';
-      }
+    $('.submit button').onclick = e => {
 
-      $('.overlay').onclick = e => {
-        if (e.target.classList.contains('overlay')) sectionModal.innerHTML = '';
-      }
+      action(inputTitle.value, inputContent.value);
+
+      sectionModal.innerHTML = '';
+    };
+
+    $('.overlay').onclick = e => {
+      if (e.target.classList.contains('overlay')) sectionModal.innerHTML = '';
+    };
   }
 
 
   addButton.addEventListener('click', event => {
 
-    modal('','', (title, content) => {
+    modal('', '', (title, content) => {
       noteController.addNote(title, content);
     });
-  })
+  });
+
+  $('.option-icon-export').onclick = noteController.exportData;
+
 
   // Garante que todas as notas receberão o evento de click
   // Sem que aconteçam registros de evento repetidos
@@ -82,10 +85,10 @@ const noteController = new NoteController();
 
         modal(note['_title'], note['_content'], (title, content) => {
           noteController.editNote(title, content, idx);
-        })
+        });
 
-        
-      })
+
+      });
 
       item.addEventListener('contextmenu', event => {
         event.preventDefault();
@@ -98,13 +101,13 @@ const noteController = new NoteController();
 
         noteController.deleteNote(allNotes.indexOf(target));
         return false;
-      })
+      });
 
       item.dataset.event = true;
-    })
+    });
 
   });
 
-  observer.observe(document.querySelector('.notes'), { attributes: false, childList: true, subtree: false })
+  observer.observe(document.querySelector('.notes'), { attributes: false, childList: true, subtree: false });
 
-})()
+})();
