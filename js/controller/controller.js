@@ -24,6 +24,23 @@ class NoteController {
       .then(dao => dao.addNote(note));
   }
 
+  exportData() {
+    new Promise((resolve, reject) => {
+      ConnectionFactory
+        .getConnection()
+        .then(connection => new NoteDao(connection))
+        .then(dao => dao.getNotes())
+        .then(list => {
+          const date = new Date();
+          const link = document.createElement('a');
+          link.href = 'data:application/json,' + encodeURIComponent(JSON.stringify(list));
+          link.target = '_blank';
+          link.download = `backup_${date.getDate()}-${date.getMonth() + 1}-${date.getUTCFullYear()}.json`;
+          link.click();
+        });
+    });
+  }
+
   loadNotes() {
     return new Promise((resolve, reject) => {
       ConnectionFactory
